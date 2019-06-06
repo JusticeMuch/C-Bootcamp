@@ -39,4 +39,6 @@ class   Fixed{
     
 };
 
+std::ostream & operator<<(std::ostream &o, Fixed const &j);
+
 #endif

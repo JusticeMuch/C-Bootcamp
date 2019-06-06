@@ -174,3 +174,8 @@ int     Fixed::toInt( void ) const{
     return (this->_num);
 }
 
+std::ostream & operator<<(std::ostream &o, Fixed const &j){
+    o << j.toFloat();
+    return (o);
+}
+

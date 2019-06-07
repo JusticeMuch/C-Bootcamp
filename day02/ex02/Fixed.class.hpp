@@ -8,10 +8,11 @@ class   Fixed{
 
     private : 
         int _num;
-        int _fract;
+        static const int _fract;
 
     public :
         Fixed();
+        Fixed (Fixed const &j);
         Fixed(int const n);
         Fixed(float const n);
         static Fixed& max(Fixed const &j, Fixed const &k);

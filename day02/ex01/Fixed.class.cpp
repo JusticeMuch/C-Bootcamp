@@ -4,21 +4,24 @@
 #include <cmath>
 #include <sstream>
 
-Fixed::Fixed() : _num(0), _fract(0){
+const int Fixed::_fract = 8;
+
+Fixed::Fixed() : _num(0){
     
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const n) : _num(n), _fract(0){
-    std::cout << "Int constructor called" << std::endl;;
+Fixed::Fixed (Fixed const &j){
+    *this = j;
+}
+
+Fixed::Fixed(int const n) : _num(n << _fract){
+    std::cout << "Int constructor called" << std::endl;
 }
 
 Fixed::Fixed(float const n){
-    this->_num = std::roundf(n);
-    if (this->_num > n)
-    this->_num =  this->_num - 1;
-    float dec_f = n - this->_num;
-    this->_fract = int(dec_f*100000000);
+    std::cout << "Float constructor called" << std::endl;
+    this->_num = roundf(n * (1 << _fract));
 }
 
 Fixed::~Fixed(){
@@ -28,7 +31,6 @@ Fixed::~Fixed(){
 Fixed&  Fixed::operator=(Fixed const &j){
     std::cout << "Assignation operator called" << std::endl;
     this->_num = j.getRawBits();
-    this->_fract = j._fract;
     return (*this);
 }
 
@@ -43,17 +45,11 @@ void    Fixed::setRawBits(int const raw){
 }
 
 float   Fixed::toFloat( void ) const{
-    std::string out_string;
-    std::stringstream ss;
-    ss << this->_fract;
-    out_string = ss.str();
-    std::string deci = "0." + out_string;
-    float dec = float(this->_fract);
-    return (float(this->_num) + (dec/100000000));
+        return ((float)(this->_num) / (1 << _fract));
 }
         
 int     Fixed::toInt( void ) const{
-    return (this->_num);
+    return ((int)(this->_num >> _fract));
 }
 
 std::ostream & operator<<(std::ostream &o, Fixed const &j){

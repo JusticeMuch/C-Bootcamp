@@ -8,12 +8,13 @@ class   Fixed{
 
     private : 
         int _num;
-        int _fract;
+        static const int _fract;
 
     public :
         Fixed();
         Fixed(int const n);
         Fixed(float const n);
+        Fixed (Fixed const &j);
         ~Fixed();
         Fixed&  operator=(Fixed const &j);
         int     getRawBits() const;

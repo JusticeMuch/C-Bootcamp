@@ -4,18 +4,20 @@
 #include <cmath>
 #include <sstream>
 
-Fixed::Fixed() : _num(0), _fract(0){
+const int Fixed::_fract = 8;
+
+Fixed::Fixed() : _num(0){
 }
 
-Fixed::Fixed(int const n) : _num(n), _fract(0){
+Fixed::Fixed (Fixed const &j){
+    *this = j;
+}
+
+Fixed::Fixed(int const n) : _num(n << _fract){
 }
 
 Fixed::Fixed(float const n){
-    this->_num = std::roundf(n);
-    if (this->_num > n)
-    this->_num =  this->_num - 1;
-    float dec_f = n - this->_num;
-    this->_fract = int(dec_f*100000000);
+    this->_num = roundf(n * (1 << _fract));
 }
 
 Fixed::~Fixed(){
@@ -23,7 +25,6 @@ Fixed::~Fixed(){
 
 Fixed&  Fixed::operator=(Fixed const &j){
     this->_num = j.getRawBits();
-    this->_fract = j._fract;
     return (*this);
 }
 
@@ -105,32 +106,24 @@ Fixed&    Fixed::operator!=(Fixed const &j){
 }
 
 Fixed&   Fixed::operator++(){
-    float temp = this->toFloat();
-    ++temp;
-    Fixed *res = new Fixed(temp);
-    return (*res);
+    this->_num++;
+    return (*this);
 }
 
 Fixed&   Fixed::operator--(){
-    float temp = this->toFloat();
-    --temp;
-    Fixed *res = new Fixed(temp);
-    return (*res);
+    this->_num--;
+    return (*this);
 }
 Fixed&   Fixed::operator++(int){
-    float temp = this->toFloat();
-    float result = temp;
-    ++temp;
-    Fixed *res = new Fixed(result);
-    return (*res);
+    Fixed *temp = new Fixed(*this);
+    operator++();
+    return (*temp);
 }
 
 Fixed&   Fixed::operator--(int){
-    float temp = this->toFloat();
-    float result = temp;
-    --temp;
-    Fixed *res = new Fixed(result);
-    return (*res);
+    Fixed *temp = new Fixed(*this);
+    operator++();
+    return (*temp);
 }
 
 Fixed&    Fixed::min(Fixed const &j, Fixed const &k){
@@ -161,17 +154,11 @@ void    Fixed::setRawBits(int const raw){
 }
 
 float   Fixed::toFloat( void ) const{
-    std::string out_string;
-    std::stringstream ss;
-    ss << this->_fract;
-    out_string = ss.str();
-    std::string deci = "0." + out_string;
-    float dec = float(this->_fract);
-    return (float(this->_num) + (dec/100000000));
+        return ((float)(this->_num) / (1 << _fract));
 }
         
 int     Fixed::toInt( void ) const{
-    return (this->_num);
+    return ((int)(this->_num >> _fract));
 }
 
 std::ostream & operator<<(std::ostream &o, Fixed const &j){

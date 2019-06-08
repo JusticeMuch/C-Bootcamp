@@ -42,6 +42,7 @@ ClapTrap&   ClapTrap::operator=(const ClapTrap &j){
 }
 
 void    ClapTrap::takeDamage(unsigned int amount){
+    amount = (amount > this->_armor_dr) ? amount - this->_armor_dr : 0; 
     if (this->_hp - amount > 0)
         this->_hp -= amount;
     else

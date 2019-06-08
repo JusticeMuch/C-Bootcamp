@@ -55,6 +55,7 @@ void    FragTrap::vaulthunter_dot_exe(std::string const & target){
     if (this->_ep >= 25){
         this->_ep -= 25;
         std::cout << target << " is hit with " << attacks[std::rand() % 5] << " and takes 25 damage points" << std::endl;
+        std::srand(2000);
     }else{
         std::cout << this->_name << " does not have enough energy for this attack" << " " << std::endl;
     }

@@ -44,6 +44,7 @@ FragTrap&   FragTrap::operator=(const FragTrap &j){
 }
 
 void    FragTrap::takeDamage(unsigned int amount){
+    amount = (amount > this->_armor_dr) ? amount - this->_armor_dr : 0; 
     if (this->_hp - amount > 0)
         this->_hp -= amount;
     else
@@ -73,6 +74,7 @@ void    FragTrap::vaulthunter_dot_exe(std::string const & target){
     if (this->_ep >= 25){
         this->_ep -= 25;
         std::cout << target << " is hit with " << attacks[std::rand() % 5] << " and takes 25 damage points" << std::endl;
+        std::srand(2000);
     }else{
         std::cout << this->_name << " does not have enough energy for this attack" << " " << std::endl;
     }

@@ -52,5 +52,6 @@ ScavTrap&   ScavTrap::operator=(const ScavTrap &j){
 
 void    ScavTrap::challengeNewcomer(){
     std::string challengers[5] = {"Jason", "KillBill", "Lopez", "Frattter", "Jabu"};
-        std::cout << this->_name << " challenges " << challengers[std::rand()%5] <<" to a duel." << std::endl;
+    std::cout << this->_name << " challenges " << challengers[std::rand()%5] <<" to a duel." << std::endl;
+    std::srand(2000);
 }

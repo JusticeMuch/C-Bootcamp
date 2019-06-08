@@ -45,7 +45,7 @@ FragTrap&   FragTrap::operator=(const FragTrap &j){
 
 void    FragTrap::takeDamage(unsigned int amount){
     amount = (amount > this->_armor_dr) ? amount - this->_armor_dr : 0; 
-    if (this->_hp - amount > 0)
+    if (amount < this->_hp)
         this->_hp -= amount;
     else
         this->_hp = 0;
@@ -54,6 +54,7 @@ void    FragTrap::takeDamage(unsigned int amount){
 }
 
 void    FragTrap::beRepaired(unsigned int amount){
+    int origAmount = amount;
     if (this->_hp + amount > 100){
         amount -= 100 - this->_hp;
         this->_hp = 100;
@@ -65,7 +66,7 @@ void    FragTrap::beRepaired(unsigned int amount){
     }else{
         this->_ep += amount;
     }
-    std::cout << this->_name << " receives  " << amount << " points worth of repair increasing his hp  to " <<
+    std::cout << this->_name << " receives  " << origAmount << " points worth of repair increasing his hp  to " <<
                 this->_hp<< " " << std::endl;
 }
 

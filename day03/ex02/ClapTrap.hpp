@@ -1,10 +1,9 @@
-#ifndef FRAGTRAP_H
-#define FRAGTRAP_H
+#ifndef CLAPTRAP_H
+#define CLAPTRAP_H
 
 #include <iostream>
 #include <string>
-
-class   FragTrap{
+class   ClapTrap{
     
     protected :
         int _hp;
@@ -18,17 +17,17 @@ class   FragTrap{
         std::string _name;
 
     public:
-        FragTrap();
-        FragTrap(const std::string &name);
-        FragTrap (const FragTrap &j);
-        FragTrap&   operator=(const FragTrap &j);
-        ~FragTrap();
+        ClapTrap();
+        ClapTrap(const std::string &name);
+        ClapTrap (const ClapTrap &j);
+        ClapTrap&   operator=(const ClapTrap &j);
+        ~ClapTrap();
         void    rangedAttack(std::string const & target);
         void    meleeAttack(std::string const & target);
         void    takeDamage(unsigned int amount);
         void    beRepaired(unsigned int amount);
-        void    vaulthunter_dot_exe(std::string const & target);//must still do;
 
 };
+
 
 #endif

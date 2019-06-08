@@ -1,12 +1,15 @@
 #include <iostream>
 #include <string>
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
 int main(void){
-    FragTrap billy;
+    ScavTrap steve;
     FragTrap john("John");
-    billy.takeDamage(50);
-    billy.beRepaired(30);
+    steve.challengeNewcomer();
+    steve.takeDamage(50);
+    steve.beRepaired(30);
     john.meleeAttack("Billy");
     john.rangedAttack("Billy");
     john.vaulthunter_dot_exe("Billy");

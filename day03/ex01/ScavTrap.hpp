@@ -15,7 +15,7 @@ public:
     ScavTrap(const std::string &name);
     void  challengeNewcomer();
     ScavTrap (const ScavTrap &j);
-    ScavTrap&   operator=(const FragTrap &j);
+    ScavTrap&   operator=(const ScavTrap &j);
 
 };
 
